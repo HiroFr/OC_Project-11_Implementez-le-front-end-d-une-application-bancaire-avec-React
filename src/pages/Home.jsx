@@ -9,7 +9,11 @@ import IconChat from "../assets/img/icon-chat.png";
 import IconMoney from "../assets/img/icon-money.png";
 import IconSecurity from "../assets/img/icon-security.png";
 
+//HOOKS
+import usePageTitle from "../hooks/usePageTitle";
+
 export default function Home() {
+  usePageTitle("Argent Bank");
 
   return (
     <>
