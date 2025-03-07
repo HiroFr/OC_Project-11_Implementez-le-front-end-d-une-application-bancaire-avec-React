@@ -1,0 +1,52 @@
+@use "../base/variables.scss" as var;
+
+.editUser {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin: 2rem;
+  display: none; // Hide by default
+
+  h2 {
+    margin: 0;
+    color: var.$btn-color;
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.editField {
+  label {
+    color: var.$btn-color;
+  }
+
+  input {
+    background-color: #fff;
+    border: 1px solid var.$border-color;
+    border-radius: 8px;
+    padding: 10px;
+
+    &:disabled {
+      background-color: #a1a1a1;
+    }
+  }
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.editButton {
+  color: var.$btn-color;
+  background-color: var.$btn-bg;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  padding: 16px 28px;
+}

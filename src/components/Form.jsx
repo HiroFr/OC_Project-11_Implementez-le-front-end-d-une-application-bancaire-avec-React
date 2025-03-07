@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 //REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../redux/actions/authActions";
+import { getUser } from "../redux/actions/userActions";
 
 export default function Form() {
   // State react for get the email and password
@@ -27,6 +28,7 @@ export default function Form() {
     const resultAction = await dispatch(loginUser({ email, password }));
     if (loginUser.fulfilled.match(resultAction)) {
       navigate("/dashboard");
+      dispatch(getUser());
     }
   };
   return (

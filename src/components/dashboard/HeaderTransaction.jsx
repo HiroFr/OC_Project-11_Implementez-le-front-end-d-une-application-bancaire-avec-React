@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../../redux/actions/userActions";
+import EditUser from "./editUser";
 
 export default function HeaderTransaction() {
   const dispatch = useDispatch();
@@ -14,6 +15,13 @@ export default function HeaderTransaction() {
     }
   }, [status, dispatch]);
 
+  const handleEdit = () => {
+    const editUser = document.querySelector(".editUser");
+    const header = document.querySelector(".header");
+    editUser.style.display = "flex";
+    header.style.display = "none";
+  };
+
   return (
     <>
       <div className="header">
@@ -22,8 +30,11 @@ export default function HeaderTransaction() {
           <br />
           {data?.firstName} {data?.lastName} !
         </h1>
-        <button className="edit-button">Edit Name</button>
+        <button className="edit-button" onClick={handleEdit}>
+          Edit Name
+        </button>
       </div>
+      <EditUser />
       <h2 className="sr-only">Accounts</h2>
     </>
   );
