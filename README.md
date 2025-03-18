@@ -18,7 +18,7 @@ git clone https://github.com/HiroFr/OC_Project-11_Implementez-le-front-end-d-une
 
 ### FrontEnd
 
-[Readme FrontEnd](./Frontend/README.md)
+[Readme FrontEnd](./FrontEnd/README.md)
 
 ---
 
