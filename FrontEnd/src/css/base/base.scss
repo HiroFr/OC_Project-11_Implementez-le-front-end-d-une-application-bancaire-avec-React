@@ -15,8 +15,13 @@ body {
   min-height: 100vh;
 }
 
+h1 {
+  margin: 0;
+}
+
 .main {
   flex: 1;
+  padding: 3rem 0;
 }
 
 .bg-dark {
