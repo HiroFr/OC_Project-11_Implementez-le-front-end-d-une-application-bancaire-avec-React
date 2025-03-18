@@ -18,10 +18,10 @@ git clone https://github.com/HiroFr/OC_Project-11_Implementez-le-front-end-d-une
 
 ### FrontEnd
 
-[Readme FrontEnd](./FrontEnd/README.md)
+[Readme FrontEnd](./Frontend/README.md)
 
 ---
 
 ### Backend
 
-[Readme BackEnd](./BackEnd/README.md)
+[Readme BackEnd](./Backend/README.md)
