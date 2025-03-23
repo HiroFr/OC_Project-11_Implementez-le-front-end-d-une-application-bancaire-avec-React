@@ -1,13 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001/api/v1";
 
 export const editUser = createAsyncThunk(
   "user/editUser",
   async ({ username }, thunkAPI) => {
     try {
-      const token = localStorage.getItem("token");
+      const token = sessionStorage.getItem("token") || localStorage.getItem("token");
       if (!token) {
         throw new Error("No token found");
       }

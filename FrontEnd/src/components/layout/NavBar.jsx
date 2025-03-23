@@ -1,12 +1,12 @@
 import PropTypes from "prop-types";
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router";
-import argentBankLogo from "../assets/img/argentBankLogo.png";
+import argentBankLogo from "../../assets/img/argentBankLogo.webp";
 
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
-import { getUser } from "../redux/actions/userActions";
-import { logoutUser } from "../redux/slice/authSlice";
+import { getUser } from "../../redux/actions/userActions";
+import { logoutUser } from "../../redux/slice/authSlice";
 
 export default function NavBar() {
   let navigate = useNavigate();

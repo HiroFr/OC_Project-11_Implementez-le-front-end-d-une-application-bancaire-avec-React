@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import MsgError from "../MsgError";
 
 //REDUX
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../redux/actions/authActions";
-import { getUser } from "../redux/actions/userActions";
+import { loginUser } from "../../redux/actions/authActions";
+import { getUser } from "../../redux/actions/userActions";
 
 export default function Form() {
   // State react for get the email and password
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false); // New state for remember me
+  const [errorMessage, setErrorMessage] = useState("");
 
   // Redux
   const status = useSelector((state) => state.auth.status);
@@ -25,12 +28,31 @@ export default function Form() {
 
   const handleLogin = async (event) => {
     event.preventDefault();
-    const resultAction = await dispatch(loginUser({ email, password }));
-    if (loginUser.fulfilled.match(resultAction)) {
-      navigate("/dashboard");
-      dispatch(getUser());
+    try {
+
+      if (email === "" || password === "") {
+        setErrorMessage("Email and password are required");
+        return;
+      }
+
+      const resultAction = await dispatch(loginUser({ email, password }));
+      if (loginUser.fulfilled.match(resultAction)) {
+        if (rememberMe) {
+          console.log(resultAction.payload);
+          localStorage.setItem("token", resultAction.payload.body.token);
+        } else {
+          sessionStorage.setItem("token", resultAction.payload.body.token);
+        }
+        navigate("/dashboard");
+        dispatch(getUser());
+      } else {
+        setErrorMessage("Email or password incorrect");
+      }
+    } catch {
+      setErrorMessage("An error occurred");
     }
   };
+
   return (
     <section className="sign-in-content">
       <i className="fa fa-user-circle sign-in-icon"></i>
@@ -59,13 +81,19 @@ export default function Form() {
           />
         </div>
         <div className="input-remember">
-          <input type="checkbox" id="remember-me" />
+          <input
+            type="checkbox"
+            id="remember-me"
+            checked={rememberMe}
+            onChange={(e) => setRememberMe(e.target.checked)}
+          />
           <label htmlFor="remember-me">Remember me</label>
         </div>
         <button className="sign-in-button" onClick={handleLogin}>
           Sign In
         </button>
       </form>
+      {errorMessage && <MsgError error={errorMessage} />}
     </section>
   );
 }

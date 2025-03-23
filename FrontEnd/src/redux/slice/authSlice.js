@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import { loginUser } from "../actions/authActions";
 
 const initialState = {
-  isAuthenticated: Boolean(localStorage.getItem("token")),
-  token: localStorage.getItem("token"),
+  isAuthenticated: Boolean(localStorage.getItem("token") || sessionStorage.getItem("token")),
+  token: localStorage.getItem("token") || sessionStorage.getItem("token"),
   status: "idle",
 };
 
@@ -13,7 +13,7 @@ export const authSlice = createSlice({
   reducers: {
     logoutUser: (state) => {
       state.isAuthenticated = false;
-      state.token = localStorage.removeItem("token");
+      state.token = localStorage.removeItem("token") || sessionStorage.removeItem("token");
     },
   },
   extraReducers: (builder) => {
@@ -27,7 +27,7 @@ export const authSlice = createSlice({
         state.status = "success";
       })
       .addCase(loginUser.rejected, (state) => {
-        state.status = "failed ";
+        state.status = "failed";
       });
   },
 });
