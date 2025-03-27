@@ -10,9 +10,11 @@ import { logoutUser } from "../../redux/slice/authSlice";
 
 export default function NavBar() {
   let navigate = useNavigate();
+  // Vérifie si l'utilisateur est authentifié
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
 
+  // Récupère les données utilisateur et le statut depuis le store Redux
   const data = useSelector((state) => state.user.data);
   const status = useSelector((state) => state.user.status);
 
@@ -22,6 +24,7 @@ export default function NavBar() {
     }
   }, [status, dispatch]);
 
+  // Fonction pour gérer la déconnexion de l'utilisateur
   const handleLogout = () => {
     dispatch(logoutUser());
     navigate("/sign-in");
@@ -39,6 +42,7 @@ export default function NavBar() {
         <h1 className="sr-only">Argent Bank</h1>
       </Link>
       <div>
+        {/* Affiche le nom d'utilisateur et le lien de déconnexion si l'utilisateur est authentifié */}
         {isAuthenticated ? (
           <>
             <Link className="main-nav-item" to="/dashboard">
@@ -51,6 +55,7 @@ export default function NavBar() {
             </Link>
           </>
         ) : (
+          // Affiche le lien de connexion si l'utilisateur n'est pas authentifié
           <Link to="../sign-in" className="main-nav-item">
             <i className="fa fa-user-circle"></i>
             Sign In

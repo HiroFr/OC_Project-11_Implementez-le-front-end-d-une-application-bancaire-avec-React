@@ -3,10 +3,12 @@ import axios from "axios";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001/api/v1";
 
+// Action pour récupérer le profil d'un utilisateur
 export const getUser = createAsyncThunk(
   "user/getUser",
   async (_, thunkAPI) => {
     try {
+      // Récupère le token d'authentification depuis le sessionStorage ou localStorage
       const token = sessionStorage.getItem("token") || localStorage.getItem("token");
       if (!token) {
         throw new Error("No token found");

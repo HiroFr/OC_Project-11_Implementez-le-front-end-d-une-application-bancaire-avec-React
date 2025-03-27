@@ -8,13 +8,13 @@ import { loginUser } from "../../redux/actions/authActions";
 import { getUser } from "../../redux/actions/userActions";
 
 export default function Form() {
-  // State react for get the email and password
+  // Etat pour gérer les champs du formulaire
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [rememberMe, setRememberMe] = useState(false); // New state for remember me
+  const [rememberMe, setRememberMe] = useState(false); // false par défaut
   const [errorMessage, setErrorMessage] = useState("");
 
-  // Redux
+  // Récupère le statut d'authentification depuis le store Redux
   const status = useSelector((state) => state.auth.status);
   const dispatch = useDispatch();
 
@@ -22,7 +22,7 @@ export default function Form() {
 
   useEffect(() => {
     if (status === "idle") {
-      dispatch(loginUser());
+      dispatch(loginUser()); // Charge les données utilisateur
     }
   }, [status, dispatch]);
 
@@ -30,22 +30,29 @@ export default function Form() {
     event.preventDefault();
     try {
 
+      // Vérifie si les champs email et mot de passe sont remplis
       if (email === "" || password === "") {
         setErrorMessage("Email and password are required");
         return;
       }
 
+      // Envoie une action pour se connecter avec les informations d'identification
       const resultAction = await dispatch(loginUser({ email, password }));
+      // Vérifie si l'action a réussi
       if (loginUser.fulfilled.match(resultAction)) {
+        // Si l'utilisateur a coché "Remember me"
         if (rememberMe) {
           console.log(resultAction.payload);
+          // Stocke le token dans localStorage
           localStorage.setItem("token", resultAction.payload.body.token);
         } else {
+          // Stocke le token dans sessionStorage
           sessionStorage.setItem("token", resultAction.payload.body.token);
         }
         navigate("/dashboard");
         dispatch(getUser());
       } else {
+        // Si l'authentification échoue, affiche un message d'erreur
         setErrorMessage("Email or password incorrect");
       }
     } catch {

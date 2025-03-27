@@ -7,7 +7,7 @@ import { editSlice } from "./slice/editSlice";
 
 export const store = configureStore({
   reducer: {
-    // Add the slice reducer to the store
+    // Ajout des slices au store Redux
     auth: authSlice.reducer,
     user: userSlice.reducer,
     edit: editSlice.reducer,

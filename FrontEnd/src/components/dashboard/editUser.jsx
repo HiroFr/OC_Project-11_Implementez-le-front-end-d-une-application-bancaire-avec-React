@@ -19,6 +19,7 @@ export default function EditUser() {
     }
   }, [status, dispatch]);
 
+  // Fonction pour fermer le formulaire d'édition
   const handleClose = () => {
     const editUser = document.querySelector(".editUser");
     const header = document.querySelector(".header");
@@ -27,6 +28,7 @@ export default function EditUser() {
     setError("");
   };
 
+  // Fonction pour soumettre le formulaire d'édition
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!username.trim()) {
@@ -36,6 +38,7 @@ export default function EditUser() {
     await dispatch(editUser({ username }));
     setUsername("");
     handleClose();
+    // Recharge les données utilisateur après l'édition
     dispatch(getUser());
   };
 

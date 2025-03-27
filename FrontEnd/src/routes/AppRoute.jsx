@@ -13,6 +13,7 @@ export const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: (
+      // Composant AuthRoute pour protéger le dashboard si pas authentifié
       <AuthRoute>
         <Dashboard />
       </AuthRoute>

@@ -1,15 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { editUser } from "../actions/editActions";
 
+// Initialise l'état du slice d'édition
 const initialState = {
   status: "idle",
   error: null,
 };
 
+// Crée le slice d'édition
 export const editSlice = createSlice({
   name: "edit",
   initialState,
   reducers: {},
+  // Définit les reducers asynchrones pour gérer les actions d'édition
   extraReducers: (builder) => {
     builder
       .addCase(editUser.pending, (state) => {

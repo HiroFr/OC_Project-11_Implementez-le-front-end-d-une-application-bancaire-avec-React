@@ -6,6 +6,7 @@ import EditUser from "./editUser";
 
 export default function HeaderTransaction() {
   const dispatch = useDispatch();
+  // Récupère les données utilisateur et le statut depuis le store Redux
   const data = useSelector((state) => state.user.data);
   const status = useSelector((state) => state.user.status);
 
@@ -15,6 +16,7 @@ export default function HeaderTransaction() {
     }
   }, [status, dispatch]);
 
+  // Fonction pour ouvrir le formulaire d'édition
   const handleEdit = () => {
     const editUser = document.querySelector(".editUser");
     const header = document.querySelector(".header");
