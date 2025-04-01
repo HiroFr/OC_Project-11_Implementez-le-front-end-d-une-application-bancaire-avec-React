@@ -12,7 +12,12 @@ const initialState = {
 export const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    clearDataUser: (state) => {
+      state.data = null;
+      state.status = "idle";
+    },
+  },
   // Définit les reducers asynchrones pour gérer les actions utilisateur
   extraReducers: (builder) => {
     builder
@@ -30,3 +35,4 @@ export const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
+export const { clearDataUser } = userSlice.actions;

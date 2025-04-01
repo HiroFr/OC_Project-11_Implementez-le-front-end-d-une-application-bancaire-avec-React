@@ -9,7 +9,7 @@ export const getUser = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       // Récupère le token d'authentification depuis le sessionStorage ou localStorage
-      const token = sessionStorage.getItem("token") || localStorage.getItem("token");
+      const token = thunkAPI.getState().auth.key.body.token
       if (!token) {
         throw new Error("No token found");
       }

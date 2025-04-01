@@ -3,8 +3,8 @@ import { loginUser } from "../actions/authActions";
 
 // Initialise l'état du slice d'authentification
 const initialState = {
-  isAuthenticated: Boolean(localStorage.getItem("token") || sessionStorage.getItem("token")),
-  token: localStorage.getItem("token") || sessionStorage.getItem("token"),
+  isAuthenticated: false,
+  key: null,
   status: "idle",
 };
 
@@ -16,7 +16,8 @@ export const authSlice = createSlice({
   reducers: {
     logoutUser: (state) => {
       state.isAuthenticated = false;
-      state.token = localStorage.removeItem("token") || sessionStorage.removeItem("token");
+      state.key = null;
+      state.status = "idle";
     },
   },
   // Définit les reducers asynchrones pour gérer les actions de connexion
@@ -26,8 +27,8 @@ export const authSlice = createSlice({
         state.status = "loading";
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        state.isAuthenticated = true;
-        state.token = action.payload;
+        state.key = action.payload;
+        state.isAuthenticated = Boolean(state.key);
         state.status = "success";
       })
       .addCase(loginUser.rejected, (state) => {

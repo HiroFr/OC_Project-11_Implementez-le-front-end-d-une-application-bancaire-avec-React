@@ -7,6 +7,7 @@ import argentBankLogo from "../../assets/img/argentBankLogo.webp";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../../redux/actions/userActions";
 import { logoutUser } from "../../redux/slice/authSlice";
+import { clearDataUser } from "../../redux/slice/userSlice";
 
 export default function NavBar() {
   let navigate = useNavigate();
@@ -26,8 +27,9 @@ export default function NavBar() {
 
   // Fonction pour gérer la déconnexion de l'utilisateur
   const handleLogout = () => {
-    dispatch(logoutUser());
-    navigate("/sign-in");
+    dispatch(logoutUser()); // Déconnexion de l'utilisateur
+    dispatch(clearDataUser()); // Efface les données utilisateur
+    navigate("/sign-in"); // Redirige vers la page de connexion
   };
 
   return (
